@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context";
 
 const AddTask = ({ setShowAddTask }) => {
-  const { data, setData, editingTask } = useContext(DataContext);
+  const { data, setData, editingTask, originalData, setOriginalData } =
+    useContext(DataContext);
   const [formData, setFormData] = useState({
     taskName: "",
     description: "",
@@ -38,10 +39,12 @@ const AddTask = ({ setShowAddTask }) => {
         item.id === task.id ? task : item
       );
       setData(updatedData);
+      setOriginalData(updatedData);
     } else {
       // Add new task scenario
       task.id = Date.now();
       setData([...data, task]);
+      setOriginalData([...data, task]);
     }
   };
   const handleSubmit = (e) => {

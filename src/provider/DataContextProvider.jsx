@@ -6,6 +6,7 @@ const DataContextProvider = ({ children }) => {
   const [data, setData] = useState(demoData);
   const [showAddTask, setShowAddTask] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
+  const [originalData, setOriginalData] = useState(data);
 
   return (
     <DataContext.Provider
@@ -16,6 +17,8 @@ const DataContextProvider = ({ children }) => {
         setShowAddTask,
         editingTask,
         setEditingTask,
+        originalData,
+        setOriginalData,
       }}
     >
       {children}

@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context";
 
 const Header = () => {
-  const { setData, data } = useContext(DataContext);
+  const { setData, originalData } = useContext(DataContext);
   const [searchTerm, setSearchTerm] = useState("");
-  const [originalData, setOriginalData] = useState(data);
+
   // Update original data when data context changes
+  console.log(originalData);
 
   useEffect(() => {
     setSearchTerm("");
-    setOriginalData(data);
   }, []);
 
   const handleSearch = (e) => {

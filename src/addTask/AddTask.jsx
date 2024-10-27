@@ -71,7 +71,7 @@ const AddTask = ({ setShowAddTask }) => {
   };
 
   return (
-    <div className="w-full mx-auto max-w-screen-md rounded-lg bg-gray-800 shadow-xl absolute">
+    <div className="w-full mx-auto max-w-screen-md rounded-lg bg-gray-800 shadow-xl absolute z-10">
       <div className="p-6">
         <h2 className="mb-6 text-2xl font-bold text-green-400">
           {editingTask ? "Edit Task" : "Create Task"}

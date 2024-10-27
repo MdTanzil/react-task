@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context";
-
 const Header = () => {
   const { setData, originalData } = useContext(DataContext);
   const [searchTerm, setSearchTerm] = useState("");

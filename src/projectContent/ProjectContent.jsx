@@ -10,7 +10,10 @@ import TodoGrid from "./TodoGrid";
 const ProjectContent = () => {
   const { data, showAddTask, setShowAddTask, setEditingTask } =
     useContext(DataContext);
+
   const polishData = divideDataByCategory(data);
+
+  //  click on add new
   const handleAddNew = () => {
     setEditingTask(null);
     setShowAddTask(true);

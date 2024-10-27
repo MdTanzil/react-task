@@ -51,9 +51,8 @@ const AddTask = ({ setShowAddTask }) => {
     // Call the handleSaveData function with formData
     handleSaveData(formData);
 
-    // Reset the form data if needed
     setFormData({
-      id: null, // Reset id when closing the modal
+      id: null,
       taskName: "",
       description: "",
       dueDate: "",

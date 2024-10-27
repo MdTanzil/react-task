@@ -1,12 +1,31 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import Card from "./Card";
 
 const TodoGrid = ({ data }) => {
+  const [isAscending, setIsAscending] = useState(true);
+  const toggleSortOrder = () => {
+    setIsAscending(!isAscending);
+  };
+  let sortedData = null;
+  // Sort data based on dueDate
+  try {
+    sortedData = [...data].sort((a, b) => {
+      const dateA = new Date(a.dueDate);
+      const dateB = new Date(b.dueDate);
+      return isAscending ? dateA - dateB : dateB - dateA;
+    });
+  } catch (error) {
+    sortedData = [];
+  }
+
   return (
     <div className="mb-4 w-full px-2 sm:w-1/2 md:w-1/4">
       <div className="rounded-lg bg-indigo-600 p-4">
         <div className="mb-2 flex items-center justify-between">
-          <h3 className="text-lg font-semibold">To-Do ({data?.length || 0})</h3>
+          <h3 className="text-lg font-semibold">
+            To-Do ({sortedData?.length || 0})
+          </h3>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -18,6 +37,8 @@ const TodoGrid = ({ data }) => {
             strokeLinecap="round"
             strokeLinejoin="round"
             className="icon icon-tabler icons-tabler-outline icon-tabler-sort-descending"
+            onClick={toggleSortOrder}
+            style={{ cursor: "pointer" }}
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M4 6l9 0" />
@@ -28,8 +49,8 @@ const TodoGrid = ({ data }) => {
           </svg>
         </div>
         <div>
-          {data?.length > 0 ? (
-            data.map((data) => <Card key={data.id} data={data} />)
+          {sortedData?.length > 0 ? (
+            sortedData.map((data) => <Card key={data.id} data={data} />)
           ) : (
             <p> Task List is empty!</p>
           )}

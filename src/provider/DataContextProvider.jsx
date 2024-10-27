@@ -6,6 +6,7 @@ const DataContextProvider = ({ children }) => {
   const [data, setData] = useState(demoData);
   const [showAddTask, setShowAddTask] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
+
   return (
     <DataContext.Provider
       value={{

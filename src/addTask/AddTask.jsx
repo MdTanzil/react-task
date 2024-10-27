@@ -46,7 +46,11 @@ const AddTask = ({ setShowAddTask }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
+    // console.log("Form Data Submitted:", formData);
+    if (!formData.taskName || !formData.description || !formData.dueDate) {
+      alert("Please fill in all fields before submitting.");
+      return;
+    }
 
     // Call the handleSaveData function with formData
     handleSaveData(formData);

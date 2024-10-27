@@ -1,4 +1,31 @@
+import { useContext, useEffect, useState } from "react";
+import { DataContext } from "../context";
+
 const Header = () => {
+  const { setData, data } = useContext(DataContext);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [originalData, setOriginalData] = useState(data);
+  // Update original data when data context changes
+
+  useEffect(() => {
+    setSearchTerm("");
+    setOriginalData(data);
+  }, []);
+
+  const handleSearch = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+
+    // Filter tasks based on the search term
+    const filteredTasks = term
+      ? originalData.filter((task) =>
+          task.taskName.toLowerCase().includes(term.toLowerCase())
+        )
+      : originalData; // Show all tasks if searchTerm is empty
+
+    // Update the data in the context with the filtered tasks
+    setData(filteredTasks);
+  };
   return (
     <header className="flex items-center justify-between bg-gray-800 p-4">
       <button className="lg:hidden">
@@ -21,6 +48,8 @@ const Header = () => {
         <input
           type="text"
           placeholder="Search here"
+          onChange={handleSearch}
+          value={searchTerm}
           className="w-full max-w-xl rounded-full bg-gray-700 px-4 py-2 text-white focus:outline-none"
         />
       </div>

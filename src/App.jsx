@@ -10,8 +10,8 @@ function App() {
       <div className="flex h-screen">
         <Sidebar />
         <main className="flex-1 overflow-y-auto overflow-x-hidden">
-          <Header />
           <DataContextProvider>
+            <Header />
             <ProjectContent />
           </DataContextProvider>
         </main>

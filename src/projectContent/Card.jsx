@@ -1,5 +1,12 @@
 /* eslint-disable react/prop-types */
+import { useContext } from "react";
+import { DataContext } from "../context";
 const Card = ({ data }) => {
+  const { setShowAddTask, setEditingTask } = useContext(DataContext);
+  const handleEditTask = () => {
+    setEditingTask(data);
+    setShowAddTask(true);
+  };
   return (
     <div className="mb-4 rounded-lg bg-gray-800 p-4">
       <div className="flex justify-between">
@@ -27,12 +34,14 @@ const Card = ({ data }) => {
             <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
             <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
           </svg>
+
           <svg
             className="h-4 w-4 cursor-pointer text-zinc-300"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
+            onClick={() => handleEditTask()}
           >
             <path
               strokeLinecap="round"

@@ -2,8 +2,8 @@
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context";
 
-const AddTask = ({ setShowAddTask, editingTask }) => {
-  const { data, setData } = useContext(DataContext);
+const AddTask = ({ setShowAddTask }) => {
+  const { data, setData, editingTask } = useContext(DataContext);
   const [formData, setFormData] = useState({
     taskName: "",
     description: "",
@@ -15,6 +15,7 @@ const AddTask = ({ setShowAddTask, editingTask }) => {
   useEffect(() => {
     if (editingTask) {
       setFormData({
+        id: editingTask.id,
         taskName: editingTask.taskName,
         description: editingTask.description,
         dueDate: editingTask.dueDate,
@@ -38,21 +39,21 @@ const AddTask = ({ setShowAddTask, editingTask }) => {
       );
       setData(updatedData);
     } else {
-      task.id = Date.now();
       // Add new task scenario
+      task.id = Date.now();
       setData([...data, task]);
     }
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
 
-    // Call the onSave function with form data and the editingTask id if it exists
-
+    // Call the handleSaveData function with formData
     handleSaveData(formData);
+
     // Reset the form data if needed
     setFormData({
+      id: null, // Reset id when closing the modal
       taskName: "",
       description: "",
       dueDate: "",

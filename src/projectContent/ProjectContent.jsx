@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import AddTask from "../addTask/AddTask";
 import { DataContext } from "../context";
 import { divideDataByCategory } from "../utils/devideDataByCategory";
@@ -8,11 +8,13 @@ import ReviseGrid from "./ReviseGrid";
 import TodoGrid from "./TodoGrid";
 
 const ProjectContent = () => {
-  const [showAddTask, setShowAddTask] = useState(false);
-  const { data } = useContext(DataContext);
+  const { data, showAddTask, setShowAddTask, setEditingTask } =
+    useContext(DataContext);
   const polishData = divideDataByCategory(data);
-  console.log(polishData);
-
+  const handleAddNew = () => {
+    setEditingTask(null);
+    setShowAddTask(true);
+  };
   return (
     <div className="mx-auto max-w-7xl p-6">
       {showAddTask && <AddTask setShowAddTask={setShowAddTask} />}
@@ -21,7 +23,7 @@ const ProjectContent = () => {
         <h2 className="text-2xl font-bold">Projectify</h2>
         <div className="flex space-x-2">
           <button
-            onClick={() => setShowAddTask(true)}
+            onClick={() => handleAddNew()}
             className="flex items-center rounded-md bg-gray-700 px-4 py-2 text-white"
           >
             <svg

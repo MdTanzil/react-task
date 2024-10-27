@@ -28,7 +28,7 @@ const TodoGrid = ({ data }) => {
           </svg>
         </div>
         <div>
-          {data.length > 0 ? (
+          {data?.length > 0 ? (
             data.map((data) => <Card key={data.id} data={data} />)
           ) : (
             <p> Task List is empty!</p>

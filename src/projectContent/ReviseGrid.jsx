@@ -29,7 +29,7 @@ const ReviseGrid = ({ data }) => {
             <path d="M18 6l0 12" />
           </svg>
         </div>
-        {data.length > 0 ? (
+        {data?.length > 0 ? (
           data.map((data) => <Card key={data.id} data={data} />)
         ) : (
           <p> Task List is empty!</p>

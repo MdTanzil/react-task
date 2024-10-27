@@ -2,10 +2,24 @@
 import { useContext } from "react";
 import { DataContext } from "../context";
 const Card = ({ data }) => {
-  const { setShowAddTask, setEditingTask } = useContext(DataContext);
+  const {
+    setShowAddTask,
+    setEditingTask,
+    setData,
+    data: mainData,
+  } = useContext(DataContext);
   const handleEditTask = () => {
     setEditingTask(data);
     setShowAddTask(true);
+  };
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this task?"
+    );
+    if (confirmDelete) {
+      const updatedData = mainData.filter((item) => item.id !== id);
+      setData(updatedData);
+    }
   };
   return (
     <div className="mb-4 rounded-lg bg-gray-800 p-4">
@@ -26,6 +40,7 @@ const Card = ({ data }) => {
             strokeLinecap="round"
             strokeLinejoin="round"
             className="h-4 w-4 cursor-pointer text-zinc-300"
+            onClick={() => handleDelete(data.id)}
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M4 7l16 0" />
